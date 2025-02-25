@@ -1,18 +1,12 @@
 <template>
-  <h3>To-Do-List</h3>
-  <ul>
-    <li v-for="task in tasks" 
-      :key="task.id" 
-      :class="{completed: task.completed}" 
-      @click="toggleTask(task)">
-        <strong>ID :</strong> {{ task.id }} - 
-        <strong>Text :</strong> {{ task.text }} 
-    </li>
-  </ul>
+<TaskList :tasks="tasks" :toggleTask="toggleTask" />
 </template>
 
 <script setup>
+import TaskList from './components/TaskList.vue';
 import { ref } from 'vue';
+
+
 
 // Déclarer la liste des tâches comme une variable réactive
 const tasks = ref([
@@ -31,17 +25,5 @@ const toggleTask = (task) =>{task.completed = !task.completed;};
 
 
 <style scoped>
-.completed {
-  text-decoration: line-through;
-  color: gray;
-}
-li {
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-li:hover {
-  color: blue;  /* Change la couleur au survol pour plus de feedback */
-}
 
 </style>
