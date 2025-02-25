@@ -1,30 +1,47 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <h3>To-Do-List</h3>
+  <ul>
+    <li v-for="task in tasks" 
+      :key="task.id" 
+      :class="{completed: task.completed}" 
+      @click="toggleTask(task)">
+        <strong>ID :</strong> {{ task.id }} - 
+        <strong>Text :</strong> {{ task.text }} 
+    </li>
+  </ul>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+
+// Déclarer la liste des tâches comme une variable réactive
+const tasks = ref([
+  { id: 1, text: "Acheter du lait", completed: false },
+  { id: 2, text: "Coder la todolist", completed: true },
+  { id: 3, text: "Faire du sport", completed: false },
+  { id: 4, text: "Prendre une douche", completed: false },
+  { id: 5, text: "Jouer à LOL", completed: true },
+  { id: 6, text: "Regarder Game of Thrones", completed: false },
+  { id: 7, text: "Lire le dernier chapitre de One Piece", completed: false }
+]);
+const toggleTask = (task) =>{task.completed = !task.completed;};  
+</script>
+
+
+
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+li {
+  cursor: pointer;
+  transition: 0.2s;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+li:hover {
+  color: blue;  /* Change la couleur au survol pour plus de feedback */
 }
+
 </style>
