@@ -1,4 +1,6 @@
 <template>
+<input v-model="newTaskText" placeholder="Nouvelle tâche" />
+<button @click="addTask" type="button">Ajouter</button>
 <TaskList :tasks="tasks" :toggleTask="toggleTask" />
 </template>
 
@@ -19,11 +21,34 @@ const tasks = ref([
   { id: 7, text: "Lire le dernier chapitre de One Piece", completed: false }
 ]);
 const toggleTask = (task) =>{task.completed = !task.completed;};  
+
+const newTaskText = ref('');
+
+const addTask = ()=>{
+  if (newTaskText.value.trim() !== ''){
+    const newTask = {
+      id: tasks.value.length + 1,
+      text: newTaskText.value,
+      completed: false
+    };
+
+    tasks.value.push(newTask);
+
+    newTaskText.value = '';
+
+  }
+};
 </script>
 
 
 
 
 <style scoped>
-
+input {
+  margin-right: 10px;
+}
+button {
+  padding: 5px 10px;
+}
 </style>
+
