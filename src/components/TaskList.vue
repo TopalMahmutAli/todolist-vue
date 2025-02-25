@@ -7,9 +7,10 @@
         :class="{ completed: task.completed }" 
         @click="toggleTask(task)"
       >
-        <strong>ID :</strong> {{ task.id }} - 
-        <strong>Text :</strong> {{ task.text }} 
+         {{ task.text }} 
+        <button @click="$emit('remove-task', task.id)">Supprimer</button>
       </li>
+      
     </ul>
   </template>
   
@@ -17,7 +18,8 @@
  
   defineProps({
     tasks: Array,
-    toggleTask: Function
+    toggleTask: Function,
+    removeTask: Function
   });
   </script>
   
@@ -32,7 +34,7 @@
 }
 
 li:hover {
-  color: blue;  /* Change la couleur au survol pour plus de feedback */
+  color: blue;  
 }
 
   </style>

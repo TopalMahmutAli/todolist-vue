@@ -1,43 +1,65 @@
 <template>
 <input v-model="newTaskText" placeholder="Nouvelle tâche" />
 <button @click="addTask" type="button">Ajouter</button>
-<TaskList :tasks="tasks" :toggleTask="toggleTask" />
+<TaskList :tasks="tasks" :toggleTask="toggleTask" @removeTask="removeTask" />
 </template>
 
 <script setup>
 import TaskList from './components/TaskList.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-
-
-// Déclarer la liste des tâches comme une variable réactive
-const tasks = ref([
-  { id: 1, text: "Acheter du lait", completed: false },
-  { id: 2, text: "Coder la todolist", completed: true },
-  { id: 3, text: "Faire du sport", completed: false },
-  { id: 4, text: "Prendre une douche", completed: false },
-  { id: 5, text: "Jouer à LOL", completed: true },
-  { id: 6, text: "Regarder Game of Thrones", completed: false },
-  { id: 7, text: "Lire le dernier chapitre de One Piece", completed: false }
-]);
-const toggleTask = (task) =>{task.completed = !task.completed;};  
-
+const tasks = ref([]);
 const newTaskText = ref('');
+
+const updateLocalStorage = () => {
+  localStorage.setItem('tasks', JSON.stringify(tasks.value));
+};
+
+onMounted(() => {
+  
+  try {
+    const savedTasks = localStorage.getItem('tasks');
+    
+    if (savedTasks) {
+      tasks.value = JSON.parse(savedTasks);
+    } else {
+      tasks.value = [];
+    }
+  } catch (error) {
+    // Si une erreur se produit (par exemple, une erreur de parsing), on initialise une liste vide
+    tasks.value = [];
+    console.error('Erreur lors du chargement des tâches depuis localStorage', error);
+  }
+});
+
+const toggleTask = (task) =>{
+  task.completed = !task.completed;
+  updateLocalStorage();
+};
+
+
 
 const addTask = ()=>{
   if (newTaskText.value.trim() !== ''){
     const newTask = {
-      id: tasks.value.length + 1,
+      id: Date.now(),
       text: newTaskText.value,
       completed: false
     };
 
     tasks.value.push(newTask);
-
+    updateLocalStorage();
     newTaskText.value = '';
-
   }
 };
+
+const removeTask = (taskId) =>{
+  tasks.value = tasks.value.filter(task => task.id !== taskId);
+  updateLocalStorage();
+};
+
+
+
 </script>
 
 
