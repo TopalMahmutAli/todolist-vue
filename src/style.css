@@ -78,3 +78,132 @@ button:focus-visible {
   }
 }
 */
+<style scoped>
+/* Appliquer une couleur de fond douce et centrer le contenu */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Forme des éléments input et button */
+input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #5b9bd5;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #5b9bd5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #4a8cc7;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Amélioration de la liste des tâches */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fafafa;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Ajouter un effet de "raye" sur les tâches complètes */
+li.completed {
+  text-decoration: line-through;
+  color: #888;
+  background-color: #f1f1f1;
+}
+
+li:hover {
+  background-color: #f9f9f9;
+}
+
+/* Bouton de suppression */
+button.remove-btn {
+  background-color: #e74c3c;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: white;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.remove-btn:hover {
+  background-color: #c0392b;
+}
+
+button.remove-btn:active {
+  transform: scale(0.9);
+}
+
+/* Animation pour la liste des tâches */
+li {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ajouter une marge entre les éléments */
+h3 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+</style>

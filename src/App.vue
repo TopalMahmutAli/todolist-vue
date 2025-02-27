@@ -1,8 +1,13 @@
 <template>
-<input v-model="newTaskText" placeholder="Nouvelle tâche" />
+<h3>Ma To-Do List</h3>
+<input v-model="newTaskText" 
+  placeholder="Nouvelle tâche" 
+  @keydown.enter="addTask" />
 <button @click="addTask" type="button">Ajouter</button>
-<TaskList :tasks="tasks" :toggleTask="toggleTask" @removeTask="removeTask" />
+<TaskList :tasks="tasks" :toggleTask="toggleTask" @removeTask="removeTask" @updateTask="updateLocalStorage" />
+
 </template>
+
 
 <script setup>
 import TaskList from './components/TaskList.vue';
@@ -44,6 +49,7 @@ const addTask = ()=>{
     const newTask = {
       id: Date.now(),
       text: newTaskText.value,
+      isEditing: false,
       completed: false
     };
 
