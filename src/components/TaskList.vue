@@ -4,9 +4,10 @@
       v-for="task in tasks" 
       :key="task.id" 
       :class="{ completed: task.completed }"
-      @click="toggleTask(task)"
+      @dblclick="toggleTask(task)"
     >
       <span v-if="!task.isEditing">{{ task.text }}</span>
+      <!--<span v-if="task.date"> - Ajouté le {{ task.date }}</span>-->
 
       <input 
         v-else 
@@ -33,7 +34,8 @@
 defineProps({
   tasks: Array,
   toggleTask: Function,
-  removeTask: Function
+  removeTask: Function,
+  updateTask: Function,
 });
 
 
